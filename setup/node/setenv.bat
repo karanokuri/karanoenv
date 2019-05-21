@@ -1,9 +1,7 @@
 @echo off
 setlocal
 
-set PATH=%KARANOENV_APPS_DIR%\yarn\bin;%PATH%
-
-call :which yarn && (
+if exist "%KARANOENV_BIN_DIR%\yarn.js" (
   for /f "delims=" %%I in ('yarn global bin') do set "PATH=%%I;%PATH%"
 )
 

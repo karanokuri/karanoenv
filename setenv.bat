@@ -13,8 +13,8 @@ set KARANOENV_BIN_DIR=%KARANOENV%\bin
 
 set KARANOENV_DOTFILES=%KARANOENV%\dotfiles
 
-set PATH=%KARANOENV%\tools;%PATH%
 set PATH=%KARANOENV_BIN_DIR%;%PATH%
+set PATH=%KARANOENV%\tools;%PATH%
 
 for /d %%D in (%~dp0setup\*) do (
   for %%F in (%%D\setenv.*) do (
