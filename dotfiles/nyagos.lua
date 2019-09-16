@@ -23,7 +23,7 @@ nyagos.alias.gvim = "cmd /c start gvim"
 
 -- Set Prompt ----------------------------------------------------------------
 -- code from 'http://lua-users.org/wiki/SplitJoin'
-string.split = function (str, pat)
+share.split = function (str, pat)
     local t = {}
     local fpat = "(.-)"..pat
     local last_end = 1
@@ -42,8 +42,8 @@ string.split = function (str, pat)
     return t
 end
 
--- code from 'http://qiita.com/JugnautOnishi/items/551d040cd81a77c28739'
-function gis()
+-- code from https://qiita.com/JugernautOnishi/items/aae90e9bbbd897c0d5ed
+share.gis = function ()
   local gs = {}
   local c  = {}
   c.dc     = "$e[36;40;1m" -- default color
@@ -54,76 +54,77 @@ function gis()
   c.ngc    = "$e[31;1m" -- color only
 
   gs.gitbool = nyagos.eval('git rev-parse --is-inside-work-tree 2>nul')
-  if gs.gitbool == 'true' then
-    --nyagos.evalは出力をtrimする(?)ので--branch必須
-    gs.gitst = nyagos.eval('git status --porcelain --branch 2>nul')
-    local t = {}
-    t = gs.gitst:split("\n")
-    for i, v in ipairs(t) do
-      if i == 1 then
-        gs.remote = v:match("^##.*")
+  if gs.gitbool ~= 'true' then
+    return false
+  end
+  --nyagos.evalは出力をtrimする(?)ので--branch必須
+  gs.gitst = nyagos.eval('git status --porcelain --branch 2>nul')
+  local t = {}
+  t = share.split(gs.gitst, "\n")
+  for i, v in ipairs(t) do
+    if i == 1 then
+      gs.remote = v:match("^##.*")
+      -- ahead or behind
+      if gs.remote then
         -- local branch name
         gs.lbn = nyagos.eval("git rev-parse --abbrev-ref HEAD 2>nul")
-        -- ahead or behind
-        if gs.remote then
-          -- remote branch name
-          gs.rbn = gs.remote:match("[^%.]%w*/"..gs.lbn) or c.ng.."/"..gs.lbn
-          gs.bst = gs.remote:match("%[.*%]")
-          if gs.bst then
-            local ab = gs.bst:gsub("[%[%]]", "")
-            ab = ab:split(",")
-            for i, v in ipairs(ab) do
-              local oltab = v:split(" ")
-              local lastlng = oltab[2] == "1" and " commit." or " commits."
-              if oltab[1] == "ahead" then
-                -- ahead
-                gs.ahead = c.ngc..oltab[1].." "..c.ngc..oltab[2]..lastlng
-                gs.push = c.ng
-              elseif oltab[1] == "behind" then
-                -- behind
-                gs.behind = c.ngc..oltab[1].." "..c.ngc..oltab[2]..lastlng
-                gs.pull = c.ng
-              end
-              gs.ahead = gs.ahead or ""
-              gs.behind = gs.behind or ""
-              gs.synced = gs.synced or ""
+        -- remote branch name
+        gs.rbn = gs.remote:match("%.%.%.(%w*/%S+)") or c.ng.."/"..gs.lbn
+        gs.bst = gs.remote:match("%[.*%]")
+        if gs.bst then
+          local ab = gs.bst:gsub("[%[%]]", "")
+          ab = share.split(ab, ",")
+          for i, v in ipairs(ab) do
+            local oltab = share.split(v," ")
+            local lastlng = oltab[2] == "1" and " commit." or " commits."
+            if oltab[1] == "ahead" then
+              -- ahead
+              gs.ahead = c.ngc..oltab[1].." "..c.ngc..oltab[2]..lastlng
+              gs.push = c.ng
+            elseif oltab[1] == "behind" then
+              -- behind
+              gs.behind = c.ngc..oltab[1].." "..c.ngc..oltab[2]..lastlng
+              gs.pull = c.ng
             end
-          else
             gs.ahead = gs.ahead or ""
             gs.behind = gs.behind or ""
-            if gs.rbn == c.ng.."/"..gs.lbn then
-              gs.synced =  c.ng.."Not Yet Add Remote Repository!"
-              gs.push = gs.push or c.bc.."-"
-              gs.pull = gs.pull or c.bc.."-"
-            else
-              gs.synced = c.ok.."All Synced!"
-              gs.push = gs.push or c.ok
-              gs.pull = gs.pull or c.ok
-            end
+            gs.synced = gs.synced or ""
+          end
+        else
+          gs.ahead = gs.ahead or ""
+          gs.behind = gs.behind or ""
+          if gs.rbn == c.ng.."/"..gs.lbn then
+            gs.synced =  c.ng.."Not Yet Add Remote Repository!"
+            gs.push = gs.push or c.bc.."-"
+            gs.pull = gs.pull or c.bc.."-"
+          else
+            gs.synced = c.ok.."All Synced!"
+            gs.push = gs.push or c.ok
+            gs.pull = gs.pull or c.ok
           end
         end
-      else
-        -- untrackcheck
-        if gs.add ~= c.ng then
-          gs.add = v:match("^%?%?") and c.ng or c.ok
-        end
-        -- modifycheck
-        if gs.mod ~= c.ng then
-          gs.mod = v:match("M%s[^%s]") and c.ng or c.ok
-        end
-        -- commitcheck
-        if gs.commit ~= c.ng then
-          gs.commit = v:match("[AM]%s%s") and c.ng or c.ok
-        end
+      end
+    else
+      -- untrackcheck
+      if gs.add ~= c.ng then
+        gs.add = v:match("^%?%?") and c.ng or c.ok
+      end
+      -- modifycheck
+      if gs.mod ~= c.ng then
+        gs.mod = v:match("M%s[^%s]") and c.ng or c.ok
+      end
+      -- commitcheck
+      if gs.commit ~= c.ng then
+        gs.commit = v:match("[AM]%s%s") and c.ng or c.ok
       end
     end
-    gs.add = gs.add or c.ok
-    gs.mod = gs.mod or c.ok
-    gs.commit = gs.commit or c.ok
-    gs.push = gs.push or c.ok
-    gs.pull = gs.pull or c.ok
-    gs.result = c.dc.."$_(Untrack:"..gs.add..c.dc.." Modify:"..gs.mod..c.dc.." Commit:"..gs.commit..c.dc.." Push:"..gs.push..c.dc.." Pull:"..gs.pull..c.dc..c.dc.." Branch:("..c.bc..gs.rbn..c.dc..")["..gs.ahead..gs.behind..gs.synced..c.dc.."]"..c.dc..")"
   end
+  gs.add = gs.add or c.ok
+  gs.mod = gs.mod or c.ok
+  gs.commit = gs.commit or c.ok
+  gs.push = gs.push or c.ok
+  gs.pull = gs.pull or c.ok
+  gs.result = c.dc.."$_(Untrack:"..gs.add..c.dc.." Modify:"..gs.mod..c.dc.." Commit:"..gs.commit..c.dc.." Push:"..gs.push..c.dc.." Pull:"..gs.pull..c.dc..c.dc.." Branch:("..c.bc..gs.rbn..c.dc..")["..gs.ahead..gs.behind..gs.synced..c.dc.."]"..c.dc..")"
   return gs.result
 end
 
@@ -154,7 +155,7 @@ nyagos.prompt = function(this)
 
   local color = (err_level == 0) and "$_$e[36;40;1m" or "$_$e[35;40;1m"
 
-  local pts = color..info..'[$s$P$s]'..(gis() or '')..'$e[37;1m$_$$$s'
+  local pts = color..info..'[$s$P$s]'..(share.gis() or '')..'$e[37;1m$_$$$s'
 
   if nyagos.env.BEEP_FLAG == 'on' then
     nyagos.eval("rundll32 user32.dll,MessageBeep")
