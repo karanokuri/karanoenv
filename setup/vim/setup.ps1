@@ -27,4 +27,11 @@ if(!(Test-Path($DIST))){ mkdir $DIST | Out-Null }
 Write-Host "Extracting $ARCHIVE ..."
 busybox unzip -oq $ARCHIVE -d $DIST
 
+if(!(Test-Path "$Env:USERPROFILE\.vimrc"))
+{
+  'source $KARANOENV/dotfiles/.vimrc'                          |
+    % { [Text.Encoding]::UTF8.GetBytes($_) }                   |
+    Set-Content -Path "$Env:USERPROFILE\.vimrc" -Encoding Byte
+}
+
 del $ARCHIVE
