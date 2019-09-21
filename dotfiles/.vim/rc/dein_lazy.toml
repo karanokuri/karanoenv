@@ -1,0 +1,37 @@
+[[plugins]]
+repo  = 'mattn/emmet-vim'
+on_ft = ['htm', 'html', 'css']
+hook_source = 'source $DOTVIM_DIR/plugins/emmet/hook_source.vim'
+
+[[plugins]] # toml syntax
+repo  = 'cespare/vim-toml'
+on_ft = 'toml'
+
+[[plugins]] # ps1 syntax
+repo  = 'PProvost/vim-ps1'
+on_ft = 'ps1'
+
+[[plugins]] # kotlin syntax
+repo  = 'udalov/kotlin-vim'
+on_ft = 'kt'
+
+[[plugins]] # typescript syntax
+repo    = 'leafgarland/typescript-vim'
+on_ft   = 'typescript'
+
+# [[plugins]]
+# repo  = 'fatih/vim-go'
+# on_ft = 'go'
+# hook_post_update = 'GoUpdateBinaries'
+
+# [[plugins]]
+# repo  = 'karanokuri/previm'
+# rev   = 'feature/add-plantuml-plugin'
+# on_ft = 'markdown'
+# depends = 'open-browser.vim'
+
+[[plugins]]
+repo = 'tyru/open-browser.vim'
+
+[[plugins]]
+repo = 'Shougo/context_filetype.vim'
