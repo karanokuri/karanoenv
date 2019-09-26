@@ -40,3 +40,8 @@ let g:syntastic_java_javac_options =
 let g:syntastic_go_checkers = ['golint', 'govet', 'gometalinter']
 let g:syntastic_go_gometalinter_args = ['--disable-all', '--enable=errcheck']
 "  }}}
+
+"  typescript {{{ -------------------------------------------------------------
+let g:syntastic_typescript_checkers = ['tsc', 'lynt']
+let g:syntastic_typescript_lynt_exec = './node_modules/.bin/lynt'
+"  }}}
