@@ -22,7 +22,7 @@ repo = 'sheerun/vim-wombat-scheme'
 hook_add = '''au VimEnter * nested colorscheme wombat'''
 
 [[plugins]]
-repo = 'scrooloose/syntastic'
+repo = 'vim-syntastic/syntastic'
 hook_add = 'source $DOTVIM_DIR/plugins/syntastic/hook_add.vim'
 
 [[plugins]]
