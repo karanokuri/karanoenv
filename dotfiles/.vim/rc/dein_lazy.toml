@@ -15,6 +15,10 @@ on_ft = 'ps1'
 repo  = 'udalov/kotlin-vim'
 on_ft = 'kt'
 
+[[plugins]] # typescript syntax
+repo    = 'leafgarland/typescript-vim'
+on_ft   = 'typescript'
+
 [[plugins]] # rust syntax highlight, formattingm syntastic integration, ...
 repo    = 'rust-lang/rust.vim'
 on_ft   = 'rust'
