@@ -1,0 +1,43 @@
+[[plugins]]
+repo = 'Shougo/dein.vim'
+
+[[plugins]]
+repo   = 'Shougo/neocomplete.vim'
+hook_add = 'source $DOTVIM_DIR/plugins/neocomplete/hook_add.vim'
+
+[[plugins]]
+repo = 'Shougo/neosnippet.vim'
+hook_add = 'source $DOTVIM_DIR/plugins/neosnippet/hook_add.vim'
+
+[[plugins]]
+repo = 'Shougo/neosnippet-snippets'
+depends = 'neosnippet.vim'
+
+[[plugins]]
+repo = 'Shougo/vimshell'
+hook_add = 'source $DOTVIM_DIR/plugins/vimshell/hook_add.vim'
+
+[[plugins]]
+repo = 'sheerun/vim-wombat-scheme'
+hook_add = '''au VimEnter * nested colorscheme wombat'''
+
+[[plugins]]
+repo = 'vim-syntastic/syntastic'
+hook_add = 'source $DOTVIM_DIR/plugins/syntastic/hook_add.vim'
+
+[[plugins]]
+repo = 'itchyny/lightline.vim'
+hook_add = 'source $DOTVIM_DIR/plugins/lightline/hook_add.vim'
+
+[[plugins]]
+repo = 'MetalPhaeton/easybracket-vim'
+
+[[plugins]]
+repo = 'tpope/vim-fugitive'
+
+[[plugins]]
+repo = 'airblade/vim-gitgutter'
+
+[[plugins]]
+repo = 'osyo-manga/vim-precious'
+depends = 'context_filetype.vim'

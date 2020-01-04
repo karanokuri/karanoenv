@@ -28,4 +28,16 @@ Write-Host "Extracting $ARCHIVE ..."
 7z x -y $ARCHIVE "-o$DIST"
 & (Join-Path $DIST "post-install.bat")
 
+git config --global core.excludesfile | Out-Null
+if($?)
+{
+  git config --global core.excludesfile ~/.karanoenv/dotfiles/.gitignore
+}
+
+git config --global include.path | Out-Null
+if($?)
+{
+  git config --global include.path ~/.karanoenv/dotfiles/.gitconfig
+}
+
 del $ARCHIVE
