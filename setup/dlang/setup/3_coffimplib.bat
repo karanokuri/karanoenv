@@ -8,7 +8,7 @@ set URL=http://ftp.digitalmars.com/%ARCHIVE%
 set DIST=%KARANOENV_BIN_DIR%
 
 if exist %DIST%\coffimplib.exe (
-  echo coffimplib is already exists.
+  echo coffimplib already exists.
   exit /b 0
 )
 

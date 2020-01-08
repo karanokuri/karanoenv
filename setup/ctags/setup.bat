@@ -8,7 +8,7 @@ set URL=http://hp.vector.co.jp/authors/VA025040/ctags/downloads/%ARCHIVE%
 set DIST=%KARANOENV_BIN_DIR%
 
 if exist %DIST%\ctags.exe (
-  echo ctags is already exists.
+  echo ctags already exists.
   exit /b 0
 )
 

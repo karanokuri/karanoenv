@@ -10,7 +10,7 @@ $DIST = Join-Path $Env:KARANOENV_APPS_DIR "lessmsi"
 ###############################################################################
 if(Join-Path $DIST lessmsi.exe | Test-Path)
 {
-  Write-Host "lessmsi is already exists."
+  Write-Host "lessmsi already exists."
   exit 0
 }
 

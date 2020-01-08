@@ -17,7 +17,7 @@ rem ###########################################################################
 if not exist %DIST% mkdir %DIST%
 
 if exist %DIST%\%FILE% (
-  echo node is already exists.
+  echo node already exists.
 ) else (
   echo downloading %URL% ...
   powershell -c "(new-object net.webclient).DownloadFile('%URL%','%DIST%\%FILE%')"
