@@ -6,6 +6,8 @@ set{
 
   EDITOR        = "gvim.exe",
   LESSCHARSET   = "utf-8",
+
+  PATHEXT       = ".COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC",
 }
 
 addpath "%HOME%\\.bin"
