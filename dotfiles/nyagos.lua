@@ -18,6 +18,8 @@ end
 nyagos.alias.l  = "ls"
 nyagos.alias.ll  = "ls -l"
 
+nyagos.alias.git = "lab"
+
 nyagos.alias.vim  = "cmd /c start gvim"
 nyagos.alias.gvim = "cmd /c start gvim"
 
@@ -53,12 +55,12 @@ share.gis = function ()
   c.ng     = "$e[31;1m○"
   c.ngc    = "$e[31;1m" -- color only
 
-  gs.gitbool = nyagos.eval('git rev-parse --is-inside-work-tree 2>nul')
+  gs.gitbool = nyagos.eval('git.exe rev-parse --is-inside-work-tree 2>nul')
   if gs.gitbool ~= 'true' then
     return false
   end
   --nyagos.evalは出力をtrimする(?)ので--branch必須
-  gs.gitst = nyagos.eval('git status --porcelain --branch 2>nul')
+  gs.gitst = nyagos.eval('git.exe status --porcelain --branch 2>nul')
   local t = {}
   t = share.split(gs.gitst, "\n")
   for i, v in ipairs(t) do
@@ -67,7 +69,7 @@ share.gis = function ()
       -- ahead or behind
       if gs.remote then
         -- local branch name
-        gs.lbn = nyagos.eval("git rev-parse --abbrev-ref HEAD 2>nul")
+        gs.lbn = nyagos.eval("git.exe rev-parse --abbrev-ref HEAD 2>nul")
         -- remote branch name
         gs.rbn = gs.remote:match("%.%.%.(%w*/%S+)") or c.ng.."/"..gs.lbn
         gs.bst = gs.remote:match("%[.*%]")
