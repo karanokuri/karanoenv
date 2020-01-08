@@ -12,7 +12,7 @@ $DIST = $Env:KARANOENV_BIN_DIR
 ###############################################################################
 if(Join-Path $DIST dub.exe | Test-Path)
 {
-  Write-Host "dub is already exists."
+  Write-Host "dub already exists."
   exit 0
 }
 

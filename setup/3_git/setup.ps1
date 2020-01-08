@@ -10,7 +10,7 @@ $DIST = Join-Path $Env:KARANOENV_APPS_DIR "PortableGit"
 ###############################################################################
 if(Test-Path $DIST)
 {
-  Write-Host "PortableGit is already exists."
+  Write-Host "PortableGit already exists."
   exit 0
 }
 

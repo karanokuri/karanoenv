@@ -4,7 +4,7 @@ $DIST = $Env:KARANOENV_BIN_DIR
 
 if(Join-Path $DIST dscanner.exe | Test-Path)
 {
-  Write-Host "dscanner is already exists."
+  Write-Host "dscanner already exists."
   exit 0
 }
 

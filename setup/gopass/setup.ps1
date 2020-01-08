@@ -10,7 +10,7 @@ $DIST = $Env:KARANOENV_BIN_DIR
 ###############################################################################
 if(Join-Path $DIST gopass.exe | Test-Path)
 {
-  Write-Host "gopass is already exists."
+  Write-Host "gopass already exists."
   exit 0
 }
 

@@ -10,7 +10,7 @@ $DIST = $Env:KARANOENV_APPS_DIR
 ###############################################################################
 if(Join-Path $DIST "vim*-kaoriya-win*" | Test-Path)
 {
-  Write-Host "Vim-KaoriYa is already exists."
+  Write-Host "Vim-KaoriYa already exists."
   exit 0
 }
 
