@@ -11,7 +11,7 @@ $DIST = Join-Path $Env:KARANOENV_APPS_DIR "7-zip"
 ###############################################################################
 if(Join-Path $DIST 7z.exe | Test-Path)
 {
-  Write-Host "7-Zip is already exists."
+  Write-Host "7-Zip already exists."
   exit 0
 }
 

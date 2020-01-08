@@ -10,7 +10,7 @@ $DIST = Join-Path $Env:KARANOENV_APPS_DIR 'gnupg'
 ###############################################################################
 if(Test-Path $DIST)
 {
-  Write-Host 'gnupg is already exists.'
+  Write-Host 'gnupg already exists.'
   exit 0
 }
 

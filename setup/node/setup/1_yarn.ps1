@@ -9,7 +9,7 @@ $DIST = $Env:KARANOENV_BIN_DIR
 ###############################################################################
 if(Join-Path $DIST $FILE | Test-Path)
 {
-  Write-Host "yarn is already exists."
+  Write-Host "yarn already exists."
   exit 0
 }
 

@@ -10,7 +10,7 @@ $DIST = Split-Path -Parent $Env:GOROOT
 ###############################################################################
 if(Test-Path $Env:GOROOT)
 {
-  Write-Host 'Go is already exists.'
+  Write-Host 'Go already exists.'
   exit 0
 }
 

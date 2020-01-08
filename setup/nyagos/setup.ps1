@@ -14,7 +14,7 @@ $DIST = Join-Path $Env:KARANOENV_APPS_DIR "nyagos"
 ###############################################################################
 if(Join-Path $DIST nyagos.exe | Test-Path)
 {
-  Write-Host "NYAGOS is already exists."
+  Write-Host "NYAGOS already exists."
   exit 0
 }
 
