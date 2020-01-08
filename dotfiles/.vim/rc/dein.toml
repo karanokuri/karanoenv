@@ -37,6 +37,7 @@ repo = 'tpope/vim-fugitive'
 
 [[plugins]]
 repo = 'airblade/vim-gitgutter'
+hook_add = 'source $DOTVIM_DIR/plugins/vim-gitgutter/hook_add.vim'
 
 [[plugins]]
 repo = 'osyo-manga/vim-precious'
