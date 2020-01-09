@@ -19,6 +19,12 @@ on_ft = 'kt'
 repo    = 'leafgarland/typescript-vim'
 on_ft   = 'typescript'
 
+[[plugins]] # rust syntax highlight, formattingm syntastic integration, ...
+repo    = 'rust-lang/rust.vim'
+on_ft   = 'rust'
+hook_source = 'source $DOTVIM_DIR/plugins/rust.vim/hook_source.vim'
+depends = 'syntastic'
+
 # [[plugins]]
 # repo  = 'fatih/vim-go'
 # on_ft = 'go'
