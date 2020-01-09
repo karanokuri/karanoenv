@@ -1,0 +1,6 @@
+@echo off
+
+set RUSTUP_HOME=%KARANOENV_APPS_DIR%\rust
+set CARGO_HOME=%KARANOENV_APPS_DIR%\rust
+
+set PATH=%CARGO_HOME%\bin;%PATH%
