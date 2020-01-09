@@ -36,3 +36,9 @@ repo = 'neoclide/coc.nvim'
 merged = 0
 rev = 'release'
 hook_add = 'source $DOTVIM_DIR/plugins/coc.nvim/hook_add.vim'
+
+[[plugins]]
+repo = 'neoclide/coc-snippets'
+build = 'yarn install --frozen-lockfile'
+hook_add = 'source $DOTVIM_DIR/plugins/coc-snippets/hook_add.vim'
+depends = 'coc.nvim'
