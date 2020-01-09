@@ -2,18 +2,6 @@
 repo = 'Shougo/dein.vim'
 
 [[plugins]]
-repo   = 'Shougo/neocomplete.vim'
-hook_add = 'source $DOTVIM_DIR/plugins/neocomplete/hook_add.vim'
-
-[[plugins]]
-repo = 'Shougo/neosnippet.vim'
-hook_add = 'source $DOTVIM_DIR/plugins/neosnippet/hook_add.vim'
-
-[[plugins]]
-repo = 'Shougo/neosnippet-snippets'
-depends = 'neosnippet.vim'
-
-[[plugins]]
 repo = 'Shougo/vimshell'
 hook_add = 'source $DOTVIM_DIR/plugins/vimshell/hook_add.vim'
 
@@ -42,3 +30,9 @@ hook_add = 'source $DOTVIM_DIR/plugins/vim-gitgutter/hook_add.vim'
 [[plugins]]
 repo = 'osyo-manga/vim-precious'
 depends = 'context_filetype.vim'
+
+[[plugins]]
+repo = 'neoclide/coc.nvim'
+merged = 0
+rev = 'release'
+hook_add = 'source $DOTVIM_DIR/plugins/coc.nvim/hook_add.vim'
