@@ -22,9 +22,6 @@ nyagos.alias.ll  = "ls -l"
 
 nyagos.alias.git = "lab"
 
-nyagos.alias.vim  = "cmd /c start gvim"
-nyagos.alias.gvim = "cmd /c start gvim"
-
 nyagos.alias.nvim = "cmd /c start nvim-qt"
 
 -- Set Prompt ----------------------------------------------------------------
