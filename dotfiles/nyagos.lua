@@ -4,7 +4,7 @@ nyagos.option.glob = true
 set{
   HOME          = nyagos.env.USERPROFILE,
 
-  EDITOR        = "gvim.exe",
+  EDITOR        = "nvim-qt.exe",
   LESSCHARSET   = "utf-8",
 
   PATHEXT       = ".COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC",
@@ -24,6 +24,8 @@ nyagos.alias.git = "lab"
 
 nyagos.alias.vim  = "cmd /c start gvim"
 nyagos.alias.gvim = "cmd /c start gvim"
+
+nyagos.alias.nvim = "cmd /c start nvim-qt"
 
 -- Set Prompt ----------------------------------------------------------------
 -- code from 'http://lua-users.org/wiki/SplitJoin'

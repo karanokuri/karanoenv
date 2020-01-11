@@ -1,0 +1,59 @@
+[[plugins]]
+repo = 'Shougo/dein.vim'
+
+[[plugins]]
+repo = 'pepo-le/win-ime-con.nvim'
+hook_add = '''let g:win_ime_con_mode = 0'''
+
+[[plugins]]
+repo = 'prabirshrestha/async.vim'
+
+[[plugins]]
+repo = 'prabirshrestha/vim-lsp'
+hook_add = 'source $NVIM_CONFIG_DIR/plugins/vim-lsp/hook_add.vim'
+
+[[plugins]]
+repo = 'mattn/vim-lsp-settings'
+merged = 0
+hook_add = 'source $NVIM_CONFIG_DIR/plugins/vim-lsp-settings/hook_add.vim'
+
+[[plugins]]
+repo = 'editorconfig/editorconfig-vim'
+
+[[plugins]]
+repo = 'sheerun/vim-wombat-scheme'
+hook_add = '''au VimEnter * nested colorscheme wombat'''
+
+# [[plugins]]
+# repo = 'vim-syntastic/syntastic'
+# hook_add = 'source $NVIM_CONFIG_DIR/plugins/syntastic/hook_add.vim'
+
+[[plugins]]
+repo = 'itchyny/lightline.vim'
+hook_add = 'source $NVIM_CONFIG_DIR/plugins/lightline/hook_add.vim'
+
+# [[plugins]]
+# repo = 'MetalPhaeton/easybracket-vim'
+ 
+[[plugins]]
+repo = 'tpope/vim-fugitive'
+ 
+[[plugins]]
+repo = 'airblade/vim-gitgutter'
+hook_add = 'source $NVIM_CONFIG_DIR/plugins/vim-gitgutter/hook_add.vim'
+ 
+[[plugins]]
+repo = 'osyo-manga/vim-precious'
+depends = 'context_filetype.vim'
+
+# [[plugins]]
+# repo = 'autozimu/LanguageClient-neovim'
+# rev = 'next'
+# hook_post_update = '''
+#   if has('win32')
+#     call system('powershell -ExecutionPolicy RemoteSigned .\\install.ps1')
+#   else
+#     call system('sh install.sh')
+#   endif
+# '''
+# hook_add = 'source $NVIM_CONFIG_DIR/plugins/LanguageClient-neovim/hook_add.vim'
