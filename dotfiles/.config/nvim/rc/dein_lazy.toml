@@ -15,6 +15,7 @@ on_i = 1
 repo = 'Shougo/neosnippet.vim'
 hook_source = 'source $NVIM_CONFIG_DIR/plugins/neosnippet/hook_source.vim'
 on_i = 1
+depends = 'neosnippet-snippets'
 
 [[plugins]]
 repo = 'Shougo/neosnippet-snippets'
