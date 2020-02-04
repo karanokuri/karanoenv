@@ -58,6 +58,10 @@ on_ft = 'kt'
 repo    = 'leafgarland/typescript-vim'
 on_ft   = 'typescript'
 
+[[plugins]] # typescriptreact syntax
+repo  = 'peitalin/vim-jsx-typescript'
+on_ft = 'typescriptreact'
+
 [[plugins]] # rust syntax highlight, formattingm syntastic integration, ...
 repo    = 'rust-lang/rust.vim'
 on_ft   = 'rust'
