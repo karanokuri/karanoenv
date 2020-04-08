@@ -76,26 +76,23 @@ endif
 " dein
 
 if executable('git')
-  let s:dein_dir = expand('~/.cache/dein')
+  let s:cache_home = empty($XDG_CACHE_HOME) ? expand('~/.cache') : $XDG_CACHE_HOME
+  let s:dein_dir = s:cache_home . '/dein'
   let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
-  let g:rc_dir    = expand('$NVIM_CONFIG_DIR/rc')
-  let s:toml      = g:rc_dir . '/dein.toml'
-  let s:lazy_toml = g:rc_dir . '/dein_lazy.toml'
+  let s:toml_file = expand('$NVIM_CONFIG_DIR/dein.toml')
 
   let g:dein#install_process_timeout = 3600
 
   if !isdirectory(s:dein_repo_dir)
-    execute '!git clone https://github.com/Shougo/dein.vim' s:dein_repo_dir
+    call system('git clone https://github.com/Shougo/dein.vim ' . shellescape(s:dein_repo_dir))
   endif
-  let &runtimepath = &runtimepath.','.s:dein_repo_dir
-
-  call dein#begin(s:dein_dir, [s:toml, s:lazy_toml])
-
-  call dein#load_toml(s:toml,      {'lazy': 0})
-  call dein#load_toml(s:lazy_toml, {'lazy': 1})
-
-  call dein#end()
-
+  let &runtimepath = s:dein_repo_dir . ',' . &runtimepath
+  if dein#load_state(s:dein_dir)
+    call dein#begin(s:dein_dir)
+    call dein#load_toml(s:toml_file)
+    call dein#end()
+    call dein#save_state()
+  endif
   if dein#check_install()
     call dein#install()
   endif
