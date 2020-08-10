@@ -14,15 +14,20 @@ if(Test-Path $Env:GOROOT)
   exit 0
 }
 
-$content = (New-Object Net.WebClient).DownloadString('https://golang.org/dl/')
+$PageUrl = New-Object Uri('https://golang.org/dl/')
+$content = (New-Object Net.WebClient).DownloadString($PageUrl)
 $parsedHtml = New-Object -com 'HTMLFILE'
 $parsedHtml.IHTMLDocument2_write($content)
 $parsedHtml.Close()
 
 $Url = $parsedHtml.getElementsByTagName('a')     |
          % href                                  |
-         ?{ $_ -like '*/go*.windows-amd64.zip' } |
-         select -First 1
+         ?{ $_ -like "*/go*.windows-$ARCH.zip" } |
+         select -First 1                         |
+         %{ New-Object Uri($_) }                 |
+         % LocalPath                             |
+         %{ New-Object Uri($PageUrl, $_) }       |
+         % AbsoluteUri
 
 Write-Host "Downloading $Url ..."
 (new-object net.webclient).DownloadFile($Url, $ARCHIVE)
