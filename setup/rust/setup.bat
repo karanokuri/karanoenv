@@ -11,7 +11,7 @@ set FILE=rustup-init.exe
 set URL=https://static.rust-lang.org/rustup/dist/%ARCH%/%FILE%
 
 if exist %RUSTUP_HOME%\bin\rustup.exe (
-  %RUSTUP_HOME%\bin\rustup.exe update
+  2>&1 %RUSTUP_HOME%\bin\rustup.exe update
 ) else (
   echo downloading %URL% ...
   powershell -c "(new-object net.webclient).DownloadFile('%URL%','%FILE%')"
