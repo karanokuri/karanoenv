@@ -14,9 +14,9 @@ if(Join-Path $DIST gopass.exe | Test-Path)
   exit 0
 }
 
-$Url = Invoke-RestMethod -Uri $API_URL -Method GET              |
-         % assets                                               |
-         ?{ $_.name -match "gopass-[0-9.]+-windows-amd64.zip" } |
+$Url = Invoke-RestMethod -Uri $API_URL -Method GET                  |
+         % assets                                                   |
+         ?{ $_.name -match "gopass.exe-[0-9.]+-windows-amd64.zip" } |
          % browser_download_url
 
 Write-Host "Downloading $URL ..."
