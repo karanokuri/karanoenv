@@ -24,7 +24,6 @@ if(!(Test-Path $DIST))
 
   Write-Host "Extracting $ARCHIVE ..."
   7z x -y $ARCHIVE "-o$DIST"
-  & (Join-Path $DIST "post-install.bat")
 
   del $ARCHIVE
 }
