@@ -15,10 +15,7 @@ if(Test-Path $Env:GOROOT)
 }
 
 $PageUrl = New-Object Uri('https://golang.org/dl/')
-$content = (New-Object Net.WebClient).DownloadString($PageUrl)
-$parsedHtml = New-Object -com 'HTMLFILE'
-$parsedHtml.IHTMLDocument2_write($content)
-$parsedHtml.Close()
+$parsedHtml = Invoke-WebRequest -Uri $PageUrl | % ParsedHtml
 
 $Url = $parsedHtml.getElementsByTagName('a')     |
          % href                                  |
