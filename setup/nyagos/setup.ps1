@@ -1,8 +1,6 @@
 $ErrorActionPreference = "Stop"
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
-$DRIVE = Split-Path $MyInvocation.MyCommand.Path -Qualifier
-
 $ARCH = if($Env:KARANOENV_ARCH -eq "64"){"amd64"}else{"386"}
 
 $API_URL = "https://api.github.com/repos/zetamatta/nyagos/releases/latest"
