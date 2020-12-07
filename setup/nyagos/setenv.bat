@@ -1,3 +1,3 @@
 @echo off
 
-set PATH=%KARANO_ENV%\cache\nyagos;%PATH%
+set PATH=%KARANOENV_APPS_DIR%\nyagos;%PATH%
