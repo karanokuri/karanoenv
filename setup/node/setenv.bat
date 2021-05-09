@@ -1,11 +1,16 @@
 @echo off
-setlocal
 
+set "NODIST_PREFIX=%KARANOENV_APPS_DIR%\nodist"
+set "PATH=%NODIST_PREFIX%\bin;%PATH%"
+
+setlocal
 if exist "%KARANOENV_BIN_DIR%\yarn.js" (
   for /f "delims=" %%I in ('yarn global bin') do set "PATH=%%I;%PATH%"
 )
+endlocal && set "PATH=%PATH%"
 
-endlocal && set PATH=%PATH%
+set "PATH=.\node_modules\.bin;%PATH%"
+
 exit /b 0
 
 :which
