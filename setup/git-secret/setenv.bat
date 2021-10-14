@@ -1,0 +1,1 @@
+@set SECRETS_GPG_COMMAND=%KARANOENV_APPS_DIR%\gnupg\bin\gpg
