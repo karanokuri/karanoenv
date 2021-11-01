@@ -10,9 +10,9 @@ $DIST = $Env:KARANOENV_APPS_DIR
 ###############################################################################
 if(!(Join-Path $DIST "Neovim" | Test-Path))
 {
-  $Url = Invoke-RestMethod -Uri $API_URL -Method GET                 |
-           % assets                                                  |
-           ?{ $_.name -match "nvim-win$($Env:KARANOENV_ARCH)\.zip" } |
+  $Url = Invoke-RestMethod -Uri $API_URL -Method GET             |
+           % assets                                              |
+           ?{ $_.name -eq "nvim-win$($Env:KARANOENV_ARCH).zip" } |
            % browser_download_url
 
   Write-Host "Downloading $Url ..."
