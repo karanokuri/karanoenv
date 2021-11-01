@@ -1,39 +1,75 @@
 [[plugins]]
 repo = 'Shougo/dein.vim'
+hook_post_update = '''
+let g:dein#plugin.build = g:python3_host_prog . " -m pip install --user --upgrade pynvim"
+'''
+
+[[plugins]]
+repo = 'vim-denops/denops.vim'
 
 [[plugins]]
 repo = 'pepo-le/win-ime-con.nvim'
 hook_add = '''let g:win_ime_con_mode = 0'''
 
 [[plugins]]
-repo = 'prabirshrestha/async.vim'
-
-[[plugins]]
-repo = 'prabirshrestha/vim-lsp'
-hook_add = 'source $NVIM_CONFIG_DIR/plugins/vim-lsp/hook_add.vim'
-
-[[plugins]]
-repo = 'mattn/vim-lsp-settings'
-merged = 0
-hook_add = 'source $NVIM_CONFIG_DIR/plugins/vim-lsp-settings/hook_add.vim'
+repo = 'sheerun/vim-wombat-scheme'
+hook_add = '''au VimEnter * nested colorscheme wombat'''
 
 [[plugins]]
 repo = 'editorconfig/editorconfig-vim'
 
 [[plugins]]
-repo = 'sheerun/vim-wombat-scheme'
-hook_add = '''au VimEnter * nested colorscheme wombat'''
-
-# [[plugins]]
-# repo = 'vim-syntastic/syntastic'
-# hook_add = 'source $NVIM_CONFIG_DIR/plugins/syntastic/hook_add.vim'
+repo = 'Shougo/context_filetype.vim'
 
 [[plugins]]
-repo = 'itchyny/lightline.vim'
-hook_add = 'source $NVIM_CONFIG_DIR/plugins/lightline/hook_add.vim'
+repo = 'osyo-manga/vim-precious'
+depends = 'context_filetype.vim'
+hook_add = 'source $NVIM_CONFIG_DIR/plugins/vim-precious/hook_add.vim'
 
-# [[plugins]]
-# repo = 'MetalPhaeton/easybracket-vim'
+[[plugins]]
+repo = 'jiangmiao/auto-pairs'
+on_event = 'InsertEnter'
+
+[[plugins]]
+repo = 'Shougo/neosnippet.vim'
+on_event = 'InsertEnter'
+hook_source = 'source $NVIM_CONFIG_DIR/plugins/neosnippet/hook_source.vim'
+
+[[plugins]]
+repo = 'Shougo/neosnippet-snippets'
+on_source = 'neosnippet.vim'
+
+[[plugins]]
+repo  = 'prettier/vim-prettier'
+build = 'yarn install'
+on_ft = [
+  'css',
+  'graphql',
+  'html',
+  'javascript',
+  'javascriptreact',
+  'json',
+  'less',
+  'markdown',
+  'scss',
+  'svelte',
+  'typescript',
+  'typescriptreact',
+  'vue',
+  'yaml',
+]
+hook_source = 'source $NVIM_CONFIG_DIR/plugins/vim-prettier/hook_source.vim'
+
+[[plugins]]
+repo = 'mattn/vim-sonictemplate'
+hook_add = 'source $NVIM_CONFIG_DIR/plugins/vim-sonictemplate/hook_add.vim'
+
+[[plugins]]
+repo = 'Shougo/deol.nvim'
+hook_add = 'nnoremap <silent><Leader>t :<C-u>Deol -command=nyagos -split=floating -winheight=35<CR>'
+
+###############################################################################
+# git
 
 [[plugins]]
 repo = 'tpope/vim-fugitive'
@@ -42,60 +78,22 @@ repo = 'tpope/vim-fugitive'
 repo = 'airblade/vim-gitgutter'
 hook_add = 'source $NVIM_CONFIG_DIR/plugins/vim-gitgutter/hook_add.vim'
 
-[[plugins]]
-repo = 'osyo-manga/vim-precious'
-depends = 'context_filetype.vim'
-
-# [[plugins]]
-# repo = 'autozimu/LanguageClient-neovim'
-# rev = 'next'
-# hook_post_update = '''
-#   if has('win32')
-#     call system('powershell -ExecutionPolicy RemoteSigned .\\install.ps1')
-#   else
-#     call system('sh install.sh')
-#   endif
-# '''
-# hook_add = 'source $NVIM_CONFIG_DIR/plugins/LanguageClient-neovim/hook_add.vim'
+###############################################################################
+# lightline
 
 [[plugins]]
-repo = 'Shougo/context_filetype.vim'
+repo = 'itchyny/lightline.vim'
+hook_add = 'source $NVIM_CONFIG_DIR/plugins/lightline/hook_add.vim'
 
 [[plugins]]
-repo = 'Shougo/deoplete.nvim'
-hook_source = 'source $NVIM_CONFIG_DIR/plugins/deoplete/hook_source.vim'
-build = 'pip install pynvim'
-on_i = 1
+repo = 'josa42/nvim-lightline-lsp'
+hook_add = '''
+let g:lightline#lsp#indicator_errors = '× '
+call lightline#lsp#register()
+'''
 
-[[plugins]]
-repo = 'lighttiger2505/deoplete-vim-lsp'
-on_i = 1
-
-[[plugins]]
-repo = 'Shougo/neosnippet.vim'
-hook_source = 'source $NVIM_CONFIG_DIR/plugins/neosnippet/hook_source.vim'
-on_i = 1
-depends = 'neosnippet-snippets'
-
-[[plugins]]
-repo = 'Shougo/neosnippet-snippets'
-depends = 'neosnippet.vim'
-on_i = 1
-
-# [[plugins]]
-# repo  = 'mtscout6/syntastic-local-eslint.vim'
-# on_ft = ['javascript', 'typescript', 'typescriptreact']
-#
-[[plugins]]
-repo  = 'prettier/vim-prettier'
-build = 'yarn install'
-on_ft = ['javascript', 'typescript', 'typescriptreact', 'vue', 'css', 'sass', 'scss', 'json', 'markdown']
-hook_source = 'source $NVIM_CONFIG_DIR/plugins/vim-prettier/hook_source.vim'
-
-[[plugins]]
-repo  = 'mattn/emmet-vim'
-on_ft = ['htm', 'html', 'css']
-hook_source = 'source $DOTVIM_DIR/plugins/emmet/hook_source.vim'
+###############################################################################
+# syntax
 
 [[plugins]] # toml syntax
 repo  = 'cespare/vim-toml'
@@ -111,17 +109,16 @@ on_ft = 'kt'
 
 [[plugins]] # typescript syntax
 repo    = 'leafgarland/typescript-vim'
-on_ft   = 'typescript'
+on_ft   = ['typescript', 'typescriptreact']
 
 [[plugins]] # typescriptreact syntax
 repo  = 'peitalin/vim-jsx-typescript'
 on_ft = 'typescriptreact'
 
-[[plugins]] # rust syntax highlight, formattingm syntastic integration, ...
+[[plugins]] # rust syntax highlight, formatting, syntastic integration, ...
 repo    = 'rust-lang/rust.vim'
 on_ft   = 'rust'
 hook_source = 'source $NVIM_CONFIG_DIR/plugins/rust.vim/hook_source.vim'
-depends = 'syntastic'
 
 [[plugins]]
 repo  = 'fatih/vim-go'
@@ -129,15 +126,62 @@ on_ft = 'go'
 hook_post_update = 'GoUpdateBinaries'
 hook_source = 'source $NVIM_CONFIG_DIR/plugins/vim-go/hook_source.vim'
 
-# [[plugins]]
-# repo  = 'karanokuri/previm'
-# rev   = 'feature/add-plantuml-plugin'
-# on_ft = 'markdown'
-# depends = 'open-browser.vim'
-
-# [[plugins]]
-# repo = 'tyru/open-browser.vim'
+[[plugins]]
+repo  = 'ElmCast/elm-vim'
+on_ft = 'elm'
+hook_source = '''let g:elm_format_autosave = 1'''
 
 [[plugins]]
-repo = 'mattn/vim-sonictemplate'
-hook_source = '''let g:sonictemplate_vim_template_dir = ['$NVIM_CONFIG_DIR/plugins/sonictemplate-vim/template']'''
+repo = 'karanokuri/vim-firestore'
+rev  = 'fix-encoding'
+
+###############################################################################
+# lsp
+
+[[plugins]]
+repo = 'neovim/nvim-lspconfig'
+
+[[plugins]]
+repo = 'williamboman/nvim-lsp-installer'
+hook_add = 'source $NVIM_CONFIG_DIR/plugins/nvim-lsp-installer/hook_add.vim'
+
+###############################################################################
+# ddc
+
+[[plugins]]
+repo = 'Shougo/ddc.vim'
+on_event = 'InsertEnter'
+hook_source = 'source $NVIM_CONFIG_DIR/plugins/ddc.vim/hook_source.vim'
+
+[[plugins]]
+repo = 'Shougo/ddc-around'
+on_source = 'ddc.vim'
+
+[[plugins]]
+repo = 'Shougo/ddc-matcher_head'
+on_source = 'ddc.vim'
+
+[[plugins]]
+repo = 'Shougo/ddc-sorter_rank'
+on_source = 'ddc.vim'
+
+[[plugins]]
+repo = 'LumaKernel/ddc-file'
+on_source = 'ddc.vim'
+
+[[plugins]]
+repo = 'Shougo/ddc-nvim-lsp'
+on_source = 'ddc.vim'
+
+[[plugins]]
+repo = 'hrsh7th/vim-vsnip-integ'
+on_source = 'ddc.vim'
+
+[[plugins]]
+repo = 'hrsh7th/vim-vsnip'
+on_source = 'ddc.vim'
+
+[[plugins]]
+repo = 'matsui54/ddc-nvim-lsp-doc'
+on_source = 'ddc-nvim-lsp'
+hook_source = '''call ddc_nvim_lsp_doc#enable()'''

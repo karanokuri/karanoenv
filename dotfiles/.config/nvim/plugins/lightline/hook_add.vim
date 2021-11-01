@@ -3,22 +3,20 @@ let g:lightline = {
       \ 'mode_map': {'c': 'NORMAL'},
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'lsp_info', 'lsp_hints', 'lsp_errors', 'lsp_warnings', 'lsp_ok' ],
+      \             [ 'lsp_status' ],
       \             [ 'fugitive', 'gitgutter', 'filename' ] ]
       \ ,
       \   'right': [ [ 'lineinfo' ],
       \              [ 'percent' ],
-      \              [ 'fileformat', 'fileencoding', 'filetype' ],
-      \              [ 'syntastic', 'lsp' ] ]
-      \ },
-      \ 'component_expand': {
-      \   'syntastic': 'SyntasticStatuslineFlag',
-      \   'lsp': 'LspStatus',
+      \              [ 'fileformat', 'fileencoding', 'filetype' ] ]
       \ },
       \ 'component_type': {
       \   'syntastic': 'error',
       \   'lsp': 'error',
       \ },
       \ 'component_function': {
+      \   'gitbranch': 'FugitiveHead',
       \   'modified': 'LightLineModified',
       \   'readonly': 'LightLineReadonly',
       \   'fugitive': 'LightLineFugitive',
@@ -52,7 +50,7 @@ endfunction
 function! LightLineFugitive()
   try
     if &ft !~? 'vimfiler\|gundo' && exists('*fugitive#head')
-      return fugitive#head()
+      return ' ' . fugitive#head()
     endif
   catch
   endtry
@@ -130,28 +128,4 @@ function! LightLineCharCode()
   let nr = printf(nrformat, nr)
 
   return "'". char ."' ". nr
-endfunction
-
-let g:syntastic_mode_map = { 'mode': 'passive' }
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-
-if exists("SyntasticCheck") == 2
-  augroup AutoSyntastic
-    autocmd!
-    autocmd BufWritePost * call s:syntastic()
-  augroup END
-  function! s:syntastic()
-      SyntasticCheck
-      call lightline#update()
-  endfunction
-endif
-
-function! LspStatus() abort
-  let l:counts = lsp#get_buffer_diagnostics_counts()
-  let l:total = l:counts.error + l:counts.warning
-  let l:line = lsp#get_buffer_first_error_line()
-  return l:total == 0 ? 'LSP: OK' : 'LSP: Error ' . l:line
 endfunction
