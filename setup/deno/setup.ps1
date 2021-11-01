@@ -28,3 +28,6 @@ Write-Host "Extracting $ARCHIVE ..."
 & 7z x -y $ARCHIVE "-o$DIST"
 
 del $ARCHIVE
+
+mkdir $Env:DENO_DIR
+mkdir $Env:DENO_INSTALL_ROOT
