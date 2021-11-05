@@ -7,7 +7,7 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 call ddc#custom#patch_global('sources', [
       \ 'around',
       \ 'file',
-      \ 'nvim-lsp',
+      \ 'vim-lsp',
       \ 'vsnip',
       \ ])
 
@@ -22,9 +22,8 @@ call ddc#custom#patch_global('sourceOptions', {
       \   'isVolatile': v:true,
       \   'forceCompletionPattern': '\S/\S*',
       \ },
-      \ 'nvim-lsp': {
-      \ 'mark': 'LSP',
-      \ 'forceCompletionPattern': '\.\w*|:\w*|->\w*',
+      \ 'vim-lsp': {
+      \   'mark': 'LSP',
       \ },
       \ })
 

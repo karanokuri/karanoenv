@@ -139,11 +139,13 @@ rev  = 'fix-encoding'
 # lsp
 
 [[plugins]]
-repo = 'neovim/nvim-lspconfig'
+repo = 'prabirshrestha/vim-lsp'
+hook_add = 'source $NVIM_CONFIG_DIR/plugins/vim-lsp/hook_add.vim'
 
 [[plugins]]
-repo = 'williamboman/nvim-lsp-installer'
-hook_add = 'source $NVIM_CONFIG_DIR/plugins/nvim-lsp-installer/hook_add.vim'
+repo = 'mattn/vim-lsp-settings'
+depends = 'vim-lsp'
+hook_add = 'source $NVIM_CONFIG_DIR/plugins/vim-lsp-settings/hook_add.vim'
 
 ###############################################################################
 # ddc
@@ -170,10 +172,6 @@ repo = 'LumaKernel/ddc-file'
 on_source = 'ddc.vim'
 
 [[plugins]]
-repo = 'Shougo/ddc-nvim-lsp'
-on_source = 'ddc.vim'
-
-[[plugins]]
 repo = 'hrsh7th/vim-vsnip-integ'
 on_source = 'ddc.vim'
 
@@ -182,6 +180,5 @@ repo = 'hrsh7th/vim-vsnip'
 on_source = 'ddc.vim'
 
 [[plugins]]
-repo = 'matsui54/ddc-nvim-lsp-doc'
-on_source = 'ddc-nvim-lsp'
-hook_source = '''call ddc_nvim_lsp_doc#enable()'''
+repo = 'shun/ddc-vim-lsp'
+on_source = 'ddc.vim'
