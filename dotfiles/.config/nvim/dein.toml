@@ -40,27 +40,6 @@ repo = 'Shougo/neosnippet-snippets'
 on_source = 'neosnippet.vim'
 
 [[plugins]]
-repo  = 'prettier/vim-prettier'
-build = 'yarn install'
-on_ft = [
-  'css',
-  'graphql',
-  'html',
-  'javascript',
-  'javascriptreact',
-  'json',
-  'less',
-  'markdown',
-  'scss',
-  'svelte',
-  'typescript',
-  'typescriptreact',
-  'vue',
-  'yaml',
-]
-hook_source = 'source $NVIM_CONFIG_DIR/plugins/vim-prettier/hook_source.vim'
-
-[[plugins]]
 repo = 'mattn/vim-sonictemplate'
 hook_add = 'source $NVIM_CONFIG_DIR/plugins/vim-sonictemplate/hook_add.vim'
 
