@@ -8,5 +8,8 @@ let g:lsp_settings = {
       \   'args': ['-c='.s:script_dir.'/efm-langserver-config.yml'],
       \   'disabled': v:false,
       \   'allowlist': ['typescript', 'typescriptreact'],
+      \   'blocklist': empty(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'node_modules/'))
+      \     ? ['typescript', 'typescriptreact']
+      \     : []
       \   }
       \ }
