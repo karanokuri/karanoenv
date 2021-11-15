@@ -31,21 +31,23 @@ repo = 'jiangmiao/auto-pairs'
 on_event = 'InsertEnter'
 
 [[plugins]]
-repo = 'Shougo/neosnippet.vim'
-on_event = 'InsertEnter'
-hook_source = 'source $NVIM_CONFIG_DIR/plugins/neosnippet/hook_source.vim'
-
-[[plugins]]
-repo = 'Shougo/neosnippet-snippets'
-on_source = 'neosnippet.vim'
-
-[[plugins]]
 repo = 'mattn/vim-sonictemplate'
 hook_add = 'source $NVIM_CONFIG_DIR/plugins/vim-sonictemplate/hook_add.vim'
 
 [[plugins]]
 repo = 'Shougo/deol.nvim'
 hook_add = 'nnoremap <silent><Leader>t :<C-u>Deol -command=nyagos -split=floating -winheight=35<CR>'
+
+###############################################################################
+# snippets
+
+[[plugins]]
+repo = 'Shougo/neosnippet.vim'
+on_event = 'InsertEnter'
+
+[[plugins]]
+repo = 'Shougo/neosnippet-snippets'
+on_event = 'InsertEnter'
 
 ###############################################################################
 # git
@@ -161,3 +163,8 @@ on_source = 'ddc.vim'
 [[plugins]]
 repo = 'shun/ddc-vim-lsp'
 on_source = 'ddc.vim'
+
+[[plugins]]
+repo = 'Shougo/deoppet.nvim'
+on_source = ['ddc.vim', 'neosnippet.vim']
+hook_source = 'source $NVIM_CONFIG_DIR/plugins/deoppet.nvim/hook_source.vim'

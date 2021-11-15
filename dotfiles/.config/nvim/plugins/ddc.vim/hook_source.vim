@@ -6,6 +6,7 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 call ddc#custom#patch_global('sources', [
       \ 'around',
+      \ 'deoppet',
       \ 'file',
       \ 'vim-lsp',
       \ 'vsnip',
@@ -17,6 +18,7 @@ call ddc#custom#patch_global('sourceOptions', {
       \   'sorters': ['sorter_rank'],
       \ },
       \ 'around': {'mark': 'A'},
+      \ 'deoppet': {'dup': v:true, 'mark': 'dp'},
       \ 'file': {
       \   'mark': 'F',
       \   'isVolatile': v:true,
