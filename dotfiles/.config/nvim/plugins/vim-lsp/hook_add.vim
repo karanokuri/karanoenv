@@ -3,6 +3,14 @@ let g:lsp_diagnostics_enabled = 1
 let g:lsp_log_file = ""
 let g:lsp_log_verbose = 0
 
+function! s:document_format() abort
+  if &ft =~ 'typescript\|typescriptreact'
+    LspDocumentFormatSync --server=efm-langserver
+    return
+  endif
+  LspDocumentFormatSync
+endfunction
+
 function! s:on_lsp_buffer_enabled() abort
   if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
   nmap <buffer> <leader>ca <plug>(lsp-code-action)
@@ -11,7 +19,7 @@ function! s:on_lsp_buffer_enabled() abort
   nmap <buffer> K <plug>(lsp-hover)
 
   let g:lsp_format_sync_timeout = 1000
-  autocmd! BufWritePre * call execute('LspDocumentFormatSync')
+  autocmd! BufWritePre * call s:document_format()
 endfunction
 
 augroup vim_lsp
