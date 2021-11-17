@@ -27,8 +27,9 @@ depends = 'context_filetype.vim'
 hook_add = 'source $NVIM_CONFIG_DIR/plugins/vim-precious/hook_add.vim'
 
 [[plugins]]
-repo = 'jiangmiao/auto-pairs'
+repo = 'windwp/nvim-autopairs'
 on_event = 'InsertEnter'
+hook_source = '''lua require('nvim-autopairs').setup{}'''
 
 [[plugins]]
 repo = 'mattn/vim-sonictemplate'
