@@ -12,10 +12,6 @@ repo = 'pepo-le/win-ime-con.nvim'
 hook_add = '''let g:win_ime_con_mode = 0'''
 
 [[plugins]]
-repo = 'sheerun/vim-wombat-scheme'
-hook_add = '''au VimEnter * nested colorscheme wombat'''
-
-[[plugins]]
 repo = 'editorconfig/editorconfig-vim'
 
 [[plugins]]
@@ -27,9 +23,9 @@ depends = 'context_filetype.vim'
 hook_add = 'source $NVIM_CONFIG_DIR/plugins/vim-precious/hook_add.vim'
 
 [[plugins]]
-repo = 'windwp/nvim-autopairs'
-on_event = 'InsertEnter'
-hook_source = '''lua require('nvim-autopairs').setup{}'''
+repo = 'echasnovski/mini.nvim'
+rev = 'stable'
+hook_add = 'source $NVIM_CONFIG_DIR/plugins/mini.nvim/hook_add.vim'
 
 [[plugins]]
 repo = 'mattn/vim-sonictemplate'
