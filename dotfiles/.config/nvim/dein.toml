@@ -35,6 +35,10 @@ hook_add = 'source $NVIM_CONFIG_DIR/plugins/vim-sonictemplate/hook_add.vim'
 repo = 'Shougo/deol.nvim'
 hook_add = 'nnoremap <silent><Leader>t :<C-u>Deol -command=nyagos -split=floating -winheight=35<CR>'
 
+[[plugins]]
+repo = 'norcalli/nvim-colorizer.lua'
+hook_add = 'source $NVIM_CONFIG_DIR/plugins/nvim-colorizer.lua/hook_add.vim'
+
 ###############################################################################
 # snippets
 
