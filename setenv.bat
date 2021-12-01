@@ -16,6 +16,9 @@ set KARANOENV_DOTFILES=%KARANOENV%\dotfiles
 set PATH=%KARANOENV_BIN_DIR%;%PATH%
 set PATH=%KARANOENV%\tools;%PATH%
 
+set XDG_CONFIG_HOME=%KARANOENV_DOTFILES%\.config
+set XDG_DATA_HOME=%USERPROFILE%\.data
+
 for /d %%D in (%~dp0setup\*) do (
   for %%F in (%%D\setenv.*) do (
     if "x%%~xF"=="x.bat" call %%F

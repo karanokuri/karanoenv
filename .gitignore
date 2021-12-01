@@ -1,2 +1,4 @@
 /apps/*
 /bin/*
+/dotfiles/.config/*
+!/dotfiles/.config/nvim/
