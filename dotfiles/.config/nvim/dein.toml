@@ -77,36 +77,26 @@ call lightline#lsp#register()
 ###############################################################################
 # syntax
 
-[[plugins]] # toml syntax
-repo  = 'cespare/vim-toml'
-on_ft = 'toml'
+[[plugins]]
+repo = 'nvim-treesitter/nvim-treesitter'
+on_event = 'VimEnter'
+hook_post_source = 'source $NVIM_CONFIG_DIR/plugins/nvim-treesitter/hook_post_source.vim'
+hook_post_update = ':TSUpdate'
+merged = '0'
 
 [[plugins]] # ps1 syntax
 repo  = 'PProvost/vim-ps1'
 on_ft = 'ps1'
 
-[[plugins]] # kotlin syntax
-repo  = 'udalov/kotlin-vim'
-on_ft = 'kt'
+# [[plugins]] # kotlin syntax
+# repo  = 'udalov/kotlin-vim'
+# on_ft = 'kt'
 
-[[plugins]] # typescript syntax
-repo    = 'leafgarland/typescript-vim'
-on_ft   = ['typescript', 'typescriptreact']
-
-[[plugins]] # typescriptreact syntax
-repo  = 'peitalin/vim-jsx-typescript'
-on_ft = 'typescriptreact'
-
-[[plugins]] # rust syntax highlight, formatting, syntastic integration, ...
-repo    = 'rust-lang/rust.vim'
-on_ft   = 'rust'
-hook_source = 'source $NVIM_CONFIG_DIR/plugins/rust.vim/hook_source.vim'
-
-[[plugins]]
-repo  = 'fatih/vim-go'
-on_ft = 'go'
-hook_post_update = 'GoUpdateBinaries'
-hook_source = 'source $NVIM_CONFIG_DIR/plugins/vim-go/hook_source.vim'
+# [[plugins]]
+# repo  = 'fatih/vim-go'
+# on_ft = 'go'
+# hook_post_update = 'GoUpdateBinaries'
+# hook_source = 'source $NVIM_CONFIG_DIR/plugins/vim-go/hook_source.vim'
 
 [[plugins]]
 repo  = 'ElmCast/elm-vim'
