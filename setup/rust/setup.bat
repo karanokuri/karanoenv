@@ -8,10 +8,11 @@ if "%KARANOENV_ARCH%"=="64" (
 )
 
 set FILE=rustup-init.exe
+set RUSTUP=%RUSTUP_HOME%\bin\rustup.exe
 set URL=https://static.rust-lang.org/rustup/dist/%ARCH%/%FILE%
 
-if exist %RUSTUP_HOME%\bin\rustup.exe (
-  2>&1 %RUSTUP_HOME%\bin\rustup.exe update
+if exist %RUSTUP% (
+  2>&1 %RUSTUP% update
 ) else (
   echo downloading %URL% ...
   powershell -c "(new-object net.webclient).DownloadFile('%URL%','%FILE%')"
@@ -21,5 +22,8 @@ if exist %RUSTUP_HOME%\bin\rustup.exe (
 
   del %FILE%
 )
+
+echo install rls
+%RUSTUP% component add rls rust-analysis rust-src
 
 endlocal
