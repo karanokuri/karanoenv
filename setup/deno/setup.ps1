@@ -3,31 +3,34 @@ $ErrorActionPreference = "Stop"
 
 $API_URL = "https://api.github.com/repos/denoland/deno/releases/latest"
 
-$ARCHIVE = "deno.zip"
-
 $DIST = $Env:KARANOENV_BIN_DIR
 
 ###############################################################################
-if(Join-Path $DIST "deno.exe" | Test-Path)
+if(!(Test-Path $DIST))
 {
-  Write-Host "deno is already exists."
-  exit 0
+  mkdir $DIST | Out-Null
+}
+if (!(Test-Path $Env:DENO_DIR))
+{
+  mkdir $Env:DENO_DIR
+}
+if (!(Test-Path $Env:DENO_INSTALL_ROOT))
+{
+  mkdir $Env:DENO_INSTALL_ROOT
 }
 
-$Url = Invoke-RestMethod -Uri $API_URL -Method GET          |
-         % assets                                           |
-         ?{ $_.name -eq "deno-x86_64-pc-windows-msvc.zip" } |
-         % browser_download_url
+$Deno = Join-Path $DIST "deno.exe"
 
-if(!(Test-Path($DIST))){ mkdir $DIST | Out-Null }
+if(Test-Path $Deno)
+{
+  & $Deno upgrade
+} else
+{
+  $Url = Invoke-RestMethod -Uri $API_URL -Method GET              `
+  | ForEach-Object assets                                         `
+  | Where-Object{ $_.name -eq "deno-x86_64-pc-windows-msvc.zip" } `
+  | ForEach-Object browser_download_url                           #
 
-Write-Host "Downloading $URL ..."
-(new-object net.webclient).DownloadFile($Url, $ARCHIVE)
-
-Write-Host "Extracting $ARCHIVE ..."
-& 7z x -y $ARCHIVE "-o$DIST"
-
-del $ARCHIVE
-
-mkdir $Env:DENO_DIR
-mkdir $Env:DENO_INSTALL_ROOT
+  Write-Host "Installing deno ..."
+  busybox sh -c "wget $Url -O - | unzip -oq - -d '$DIST'" | Out-Null
+}
