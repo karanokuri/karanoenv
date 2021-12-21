@@ -18,11 +18,14 @@ call ddc#custom#patch_global('sourceOptions', {
       \   'sorters': ['sorter_rank'],
       \   },
       \ 'around': {
-      \   'mark': 'A'
+      \   'mark': 'A',
+      \   },
+      \ 'cmdline': {
+      \   'mark': 'cmdline',
       \   },
       \ 'deoppet': {
       \   'dup': v:true,
-      \   'mark': 'dp'
+      \   'mark': 'dp',
       \   },
       \ 'file': {
       \   'mark': 'F',

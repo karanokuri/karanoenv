@@ -159,3 +159,7 @@ on_source = 'ddc.vim'
 repo = 'Shougo/deoppet.nvim'
 on_source = ['ddc.vim', 'neosnippet.vim']
 hook_source = 'source $NVIM_CONFIG_DIR/plugins/deoppet.nvim/hook_source.vim'
+
+[[plugins]]
+repo = 'Shougo/ddc-cmdline'
+on_source = 'ddc.vim'
