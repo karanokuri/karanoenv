@@ -131,6 +131,13 @@ share.gis = function ()
   return gs.result
 end
 
+share.fnm_cd = function(this)
+  local msg = nyagos.eval("%FNM_DIR%\\cd.cmd .")
+  if msg ~= '' then
+    print(msg)
+  end
+end
+
 -- Simple Prompt for CMD.EXE
 nyagos.env.PROMPT="[$s$P$s]$_$$$s"
 
@@ -147,6 +154,8 @@ share.initialized_env = nyagos.eval("cmd /c set")
 
 -- Coloring Prompt for NYAGOS.exe
 nyagos.prompt = function(this)
+  share.fnm_cd()
+
   local title = "NYAGOS - ".. nyagos.getwd():gsub('\\','/')
 
   local err_level = tonumber(nyagos.eval("echo %ERRORLEVEL%")) or 0

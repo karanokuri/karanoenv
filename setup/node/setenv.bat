@@ -1,7 +1,7 @@
 @echo off
 
-set "NODIST_PREFIX=%KARANOENV_APPS_DIR%\nodist"
-set "PATH=%NODIST_PREFIX%\bin;%PATH%"
+set FNM_DIR=%USERPROFILE%\.cache\fnm
+for /f "tokens=*" %%I in ('fnm env --use-on-cd') do call %%I
 
 setlocal
 if exist "%KARANOENV_BIN_DIR%\yarn.js" (
