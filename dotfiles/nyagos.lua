@@ -20,7 +20,7 @@ end
 nyagos.alias.l  = "ls"
 nyagos.alias.ll  = "ls -l"
 
-nyagos.alias.git = "lab"
+nyagos.alias.git = "hub"
 
 nyagos.alias.nvim = "cmd /c start nvim-qt"
 
