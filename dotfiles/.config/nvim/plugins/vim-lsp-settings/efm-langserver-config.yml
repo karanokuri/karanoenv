@@ -4,7 +4,7 @@ root-markers:
 
 tools:
   prettier: &prettier
-    format-command: 'prettier --parser typescript'
+    format-command: 'prettier --stdin-filepath ${INPUT}'
     format-stdin: true
 
 languages:
