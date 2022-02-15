@@ -11,7 +11,12 @@ let g:lsp_settings = {
       \ 'efm-langserver': {
       \   'args': ['-c='.s:script_dir.'/efm-langserver-config.yml'],
       \   'disabled': v:false,
-      \   'allowlist': ['typescript', 'typescriptreact'],
+      \   'allowlist': [
+      \     'javascript',
+      \     'javascriptreact',
+      \     'typescript',
+      \     'typescriptreact',
+      \     ],
       \   'blocklist': empty(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'node_modules/'))
       \     ? ['typescript', 'typescriptreact']
       \     : []

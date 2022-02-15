@@ -8,6 +8,10 @@ tools:
     format-stdin: true
 
 languages:
+  javascript:
+    - <<: *prettier
+  javascriptreact:
+    - <<: *prettier
   typescript:
     - <<: *prettier
   typescriptreact:
