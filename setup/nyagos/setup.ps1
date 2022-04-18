@@ -1,33 +1,40 @@
 $ErrorActionPreference = "Stop"
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
-$ARCH = if($Env:KARANOENV_ARCH -eq "64"){"amd64"}else{"386"}
+$ARCH = if($Env:KARANOENV_ARCH -eq "64")
+{
+  "amd64"
+} else
+{
+  "386"
+}
 
 $API_URL = "https://api.github.com/repos/zetamatta/nyagos/releases/latest"
-
-$ARCHIVE = "nyagos.zip"
 
 $DIST = Join-Path $Env:KARANOENV_APPS_DIR "nyagos"
 
 ###############################################################################
-if(!(Join-Path $DIST nyagos.exe | Test-Path))
+$Version = cmd /c 'nyagos --help 2>nul'                           `
+| Where-Object{ $_ -match '[0-9._]+-windows-' }                   `
+| ForEach-Object{ $_ -replace '^.* ([0-9._]+)-windows.*$', '$1' } #
+
+$Latest = Invoke-RestMethod -Uri $API_URL -Method GET
+
+if ("$Version" -ne $Latest.tag_name)
 {
-  $Url = Invoke-RestMethod -Uri $API_URL -Method GET |
-           % assets                                  |
-           ?{ $_.name -like "nyagos-*-$ARCH.zip" }   |
-           % browser_download_url
+  $Url = $Latest.assets                                `
+  | Where-Object{ $_.name -like "nyagos-*-$ARCH.zip" } `
+  | ForEach-Object browser_download_url                #
 
-  Write-Host "Downloading $URL ..."
-  (new-object net.webclient).DownloadFile($Url, $ARCHIVE)
-
-  7z x -y $ARCHIVE "-o$DIST"
-
-  del $ARCHIVE
+  Write-Host "Installing $Url ..."
+  if(Test-Path $DIST)
+  {
+    Remove-Item $DIST -Recurse -Force
+  }
+  mkdir $DIST | Out-Null
+  busybox sh -c "wget -q -O - '$Url' | unzip -oq - -d '$DIST'" | Out-Null
 }
 
-if(!(Test-Path "$Env:USERPROFILE\.nyagos"))
-{
-  'dofile(nyagos.env.KARANOENV_DOTFILES.."\\nyagos.lua")'       |
-    % { [Text.Encoding]::UTF8.GetBytes($_) }                    |
-    Set-Content -Path "$Env:USERPROFILE\.nyagos" -Encoding Byte
-}
+'dofile(nyagos.env.KARANOENV_DOTFILES.."\\.nyagos")'    `
+| ForEach-Object { [Text.Encoding]::UTF8.GetBytes($_) } `
+| Set-Content -Path "$DIST\.nyagos" -Encoding Byte      #
