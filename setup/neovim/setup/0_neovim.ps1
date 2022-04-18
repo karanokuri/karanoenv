@@ -7,7 +7,7 @@ $API_URL = "https://api.github.com/repos/neovim/neovim/releases/latest"
 
 $ARCHIVE = "nvim.zip"
 
-$DIST = $Env:KARANOENV_APPS_DIR
+$DIST = Join-Path $Env:KARANOENV_APPS_DIR "neovim"
 
 ###############################################################################
 $TagName = cmd /c 'nvim --version 2>nul'      `
@@ -25,13 +25,15 @@ if ($TagName -ne $Latest.tag_name)
   Write-Host "Downloading $Url ..."
   (new-object net.webclient).DownloadFile($Url, $ARCHIVE)
 
-  if(!(Test-Path($DIST)))
-  {
-    mkdir $DIST | Out-Null
-  }
-
   Write-Host "Extracting $ARCHIVE ..."
+  if(Test-Path $DIST)
+  {
+    Remove-Item $DIST -Recurse -Force
+  }
+  mkdir $DIST | Out-Null
   busybox unzip -oq $ARCHIVE -d $DIST
+  $ExtractDir = Get-ChildItem $DIST | ForEach-Object FullName
+  Get-ChildItem $ExtractDir | Move-Item -Destination $DIST
 
-  Remove-Item $ARCHIVE
+  Remove-Item $ARCHIVE, $ExtractDir
 }
