@@ -11,7 +11,7 @@ $DIST = Join-Path $Env:KARANOENV_APPS_DIR "neovim"
 
 ###############################################################################
 $TagName = cmd /c 'nvim --version 2>nul'      `
-| Where-Object{ $_ -like 'NVIM ' }            `
+| Where-Object{ $_ -like 'NVIM *' }           `
 | ForEach-Object{ $_.replace('NVIM ', '') }   #
 
 $Latest = Invoke-RestMethod -Uri $API_URL -Method GET
