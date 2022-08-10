@@ -1,0 +1,15 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: windows-2019
+
+    steps:
+    - name: Run install
+      run: powershell.exe -NoProfile -ExecutionPolicy Unrestricted -Command "iex(wget https://raw.githubusercontent.com/karanokuri/karanoenv/master/install.ps1 -UseBasicParsing).Content"
