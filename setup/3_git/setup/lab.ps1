@@ -11,6 +11,8 @@ $ARCH = if($Env:KARANOENV_ARCH -eq '64')
   '386'
 }
 
+$ARCHIVE = 'lab.zip'
+
 $DIST = $Env:KARANOENV_BIN_DIR
 
 ###############################################################################
@@ -31,9 +33,13 @@ if(!(Test-Path $DIST))
   mkdir $DIST | Out-Null
 }
 
-$Url = $Latest.assets                                               `
-| Where-Object{ $_.name -match "lab_[0-9.]+_windows_$ARCH.tar.gz" } `
-| ForEach-Object browser_download_url                               #
+$Url = $Latest.assets                                            `
+| Where-Object{ $_.name -match "lab_[0-9.]+_windows_$ARCH.zip" } `
+| ForEach-Object browser_download_url                            #
 
-Write-Host "Installing $Url ..."
-cmd /c "%WINDIR%\system32\curl.exe -sSL $Url | %WINDIR%\system32\tar.exe -xJf - -C $DIST lab.exe"
+Write-Host "Downloading $Url ..."
+(New-Object Net.WebClient).DownloadFile($Url, $ARCHIVE)
+
+7z x -y $ARCHIVE "-o$DIST" "-ir!lab.exe" | Out-Null
+
+Remove-Item $ARCHIVE
