@@ -1,0 +1,6 @@
+alexcvzz.vscode-sqlite
+eamodio.gitlens
+eservice-online.vs-sharper
+jmrog.vscode-nuget-package-manager
+ms-ceintl.vscode-language-pack-ja
+ms-dotnettools.csharp
