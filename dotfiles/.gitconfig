@@ -1,4 +1,5 @@
 [alias]
+  c  = commit -v
 	l  = log --oneline
 	la = log --graph --pretty='format:%C(yellow)%h%Creset %s %Cgreen(%an)%Creset %Cred%d%Creset' --all
   s  = status
