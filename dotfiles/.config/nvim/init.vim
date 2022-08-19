@@ -83,6 +83,16 @@ if has('win32')
 endif
 
 "---------------------------------------------------------------------------
+" zenhan for VS Code Neovim
+if exists('g:vscode') && executable('zenhan')
+  augroup zenhan
+    autocmd!
+    autocmd InsertLeave * :call system('zenhan 0')
+    autocmd CmdlineLeave * :call system('zenhan 0')
+  augroup END
+endif
+
+"---------------------------------------------------------------------------
 " dein
 
 if executable('git')
