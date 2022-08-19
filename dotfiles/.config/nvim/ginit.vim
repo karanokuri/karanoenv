@@ -1,4 +1,4 @@
-Guifont! HackGen35Nerd
+Guifont! HackGen Console NF:h13
 
 "---------------------------------------------------------------------------
 " Clipboard
