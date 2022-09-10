@@ -22,7 +22,7 @@ nyagos.alias.ll  = "ls -l"
 
 nyagos.alias.git = "hub"
 
-nyagos.alias.nvim = "cmd /c start nvim-qt"
+nyagos.alias.nvim = 'wezterm cli split-pane --left -- cmd /c "%USERPROFILE%/.karanoenv/setenv.bat && nvim.exe"'
 
 -- Set Prompt ----------------------------------------------------------------
 -- code from 'http://lua-users.org/wiki/SplitJoin'
