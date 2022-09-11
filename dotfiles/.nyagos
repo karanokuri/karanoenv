@@ -1,3 +1,8 @@
+package.path = nyagos.env.KARANOENV .. "/setup/nyagos/lua/?.lua;" .. package.path
+share.karano = {
+  git = require "git",
+}
+
 nyagos.option.glob = true
 
 -- Set environment variables --------------------------------------------------
@@ -59,8 +64,8 @@ share.gis = function ()
   c.ng     = "$e[31;1m○"
   c.ngc    = "$e[31;1m" -- color only
 
-  gs.gitbool = nyagos.eval('git.exe rev-parse --is-inside-work-tree 2>nul')
-  if gs.gitbool ~= 'true' then
+  gs.gitdir = share.karano.git.gitdir(nyagos.getwd())
+  if gs.gitdir == nil then
     return false
   end
   --nyagos.evalは出力をtrimする(?)ので--branch必須
@@ -73,7 +78,7 @@ share.gis = function ()
       -- ahead or behind
       if gs.remote then
         -- local branch name
-        gs.lbn = nyagos.eval("git.exe rev-parse --abbrev-ref HEAD 2>nul")
+        gs.lbn = share.karano.git.current_branch(gs.gitdir)
         -- remote branch name
         gs.rbn = gs.remote:match("%.%.%.(%w*/%S+)") or c.ng.."/"..gs.lbn
         gs.bst = gs.remote:match("%[.*%]")
