@@ -20,9 +20,12 @@ end
 nyagos.alias.l  = "ls"
 nyagos.alias.ll  = "ls -l"
 
-nyagos.alias.git = "hub"
 
 nyagos.alias.nvim = 'wezterm cli split-pane --left -- cmd /c "%USERPROFILE%/.karanoenv/setenv.bat && nvim.exe"'
+
+-- Use catalog ----------------------------------------------------------------
+use "dollar"
+use "git"
 
 -- Set Prompt ----------------------------------------------------------------
 -- code from 'http://lua-users.org/wiki/SplitJoin'
@@ -191,15 +194,6 @@ nyagos.prompt = function(this)
   end
 
   return nyagos.default_prompt(pts, title)
-end
-
--- environment variables expansion like $PATH and ${PATH}
--- http://qiita.com/nocd5/items/aa155e91a6eef58b3940
-share._filter = nyagos.filter
-nyagos.filter = function(cmdline)
-  local post = cmdline:gsub('${([%w_()]+)}', '%%%1%%')
-  post = post:gsub('$([%w_()]+)', '%%%1%%')
-  return share._filter(post)
 end
 
 -- vim:set ft=lua: --
