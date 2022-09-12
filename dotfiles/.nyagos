@@ -10,7 +10,7 @@ nyagos.option.glob = true
 set{
   HOME          = nyagos.env.USERPROFILE,
 
-  EDITOR        = "nvim-qt.exe",
+  EDITOR        = "nvim.exe",
   LESSCHARSET   = "utf-8",
 
   PATHEXT       = ".COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC",
