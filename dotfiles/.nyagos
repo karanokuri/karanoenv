@@ -34,6 +34,18 @@ nyagos.alias.nvim = 'wezterm cli split-pane --left -- cmd /c "%USERPROFILE%/.kar
 use "dollar"
 use "git"
 
+-- Beep command ---------------------------------------------------------------
+nyagos.env.KARANO_BEEP = nil
+nyagos.alias.beep = function(args)
+  if args[1] == "on" or args[1] == "off" then
+    nyagos.env.KARANO_BEEP = (args[1] == "on") and 1 or nil
+  elseif args[1] == nil then
+    nyagos.env.KARANO_BEEP = (not nyagos.env.KARANO_BEEP) and 1 or nil
+  else
+    print("Usage: beep [on/off]")
+  end
+end
+
 -- Set Prompt ----------------------------------------------------------------
 -- code from 'http://lua-users.org/wiki/SplitJoin'
 share.split = function (str, pat)
@@ -151,15 +163,6 @@ end
 -- Simple Prompt for CMD.EXE
 nyagos.env.PROMPT="[$s$P$s]$_$$$s"
 
-nyagos.env.BEEP_FLAG = 'off'
-nyagos.alias.beep = function(args)
-  if args[1] == 'on' or args[1] == 'off' then
-    nyagos.env.BEEP_FLAG = args[1]
-  elseif args[1] == nil then
-    nyagos.env.BEEP_FLAG = (nyagos.env.BEEP_FLAG == 'on') and 'off' or 'on'
-  end
-end
-
 share.karano.localenv.regist_default_envs()
 
 -- Coloring Prompt for NYAGOS.exe
@@ -172,20 +175,23 @@ nyagos.prompt = function(this)
 
   local retv = "$sExit:$s"..err_level.."$s"
   local date = "$s"..(os.date("%Y-%m-%d %H:%M:%S")).."$s"
-  local beep = "$sBeep:$s"..(nyagos.env.BEEP_FLAG).."$s"
+  local beep = "$sBeep:$s"..(nyagos.env.KARANO_BEEP and "on" or "off").."$s"
   local info = '['..retv..'|'..date..'|'..beep..']'
 
   local color = (err_level == 0) and "$_$e[36;40;1m" or "$_$e[35;40;1m"
 
   local pts = color..info..'[$s$P$s]'..(share.gis() or '')..'$e[37;1m$_$$$s'
 
-  if nyagos.env.BEEP_FLAG == 'on' then
-    nyagos.eval("rundll32 user32.dll,MessageBeep")
-  end
-
   share.karano.localenv.load()
 
   return nyagos.default_prompt(pts, title)
+end
+
+-- Hooks ----------------------------------------------------------------------
+nyagos.postexechook = function ()
+  if nyagos.env.KARANO_BEEP then
+    nyagos.raweval("rundll32", "user32.dll,MessageBeep")
+  end
 end
 
 -- vim:set ft=lua: --
