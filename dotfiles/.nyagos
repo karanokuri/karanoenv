@@ -1,7 +1,9 @@
 package.path = nyagos.env.KARANOENV .. "/setup/nyagos/lua/?.lua;" .. package.path
 share.karano = {
   git = require "git",
+  localenv = require "localenv",
 }
+require "completion"
 
 nyagos.option.glob = true
 
@@ -158,7 +160,7 @@ nyagos.alias.beep = function(args)
   end
 end
 
-share.initialized_env = nyagos.eval("cmd /c set")
+share.karano.localenv.regist_default_envs()
 
 -- Coloring Prompt for NYAGOS.exe
 nyagos.prompt = function(this)
@@ -181,22 +183,7 @@ nyagos.prompt = function(this)
     nyagos.eval("rundll32 user32.dll,MessageBeep")
   end
 
-  -- load spesific environment variables on current directory
-  local wd = nyagos.getwd()
-  if share.curdir ~= wd then
-    share.curdir = wd
-    while not nyagos.access(".localenv.lua", 0) do
-      nyagos.chdir("..")
-      if nyagos.getwd() == wd then break end -- break if reach root dir
-      wd = nyagos.getwd()
-    end
-    if share.loaded_env_dir ~= wd then
-      for v in share.initialized_env:gmatch("[^\r\n]+") do set(v) end
-      if nyagos.access(".localenv.lua", 0) then dofile(".localenv.lua") end
-      share.loaded_env_dir = wd
-    end
-    nyagos.chdir(share.curdir)
-  end
+  share.karano.localenv.load()
 
   return nyagos.default_prompt(pts, title)
 end
