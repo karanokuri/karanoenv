@@ -1,11 +1,13 @@
 let $NVIM_CONFIG_DIR = expand('<sfile>:p:h')
 
 let mapleader = "\<Space>"
+set clipboard+=unnamed
 set foldmethod=marker
 set mouse=a
 set noundofile
 set number
 set signcolumn=yes
+set termguicolors
 set wildignore+=vendor/**,.bundle/**,.git/**,node_modules/**
 
 colorscheme evening
