@@ -83,7 +83,10 @@ share.gis = function ()
     return false
   end
   --nyagos.evalは出力をtrimする(?)ので--branch必須
-  gs.gitst = nyagos.eval('git.exe status --porcelain --branch 2>nul')
+  gs.gitst, _ = nyagos.raweval("git.exe", "status", "--porcelain", "--branch")
+  if gs.gitst == nil then
+    return false
+  end
   local t = {}
   t = share.split(gs.gitst, "\n")
   for i, v in ipairs(t) do
@@ -154,9 +157,9 @@ share.gis = function ()
 end
 
 share.fnm_cd = function(this)
-  local msg = nyagos.eval("%FNM_DIR%\\cd.cmd .")
-  if msg ~= '' then
-    print(msg)
+  local msg, _ = nyagos.raweval(nyagos.env.FNM_DIR.."/cd.cmd", ".")
+  if msg ~= nil and msg ~= "" then
+    nyagos.write(msg)
   end
 end
 
