@@ -4,6 +4,8 @@ inoremap <silent><expr> <TAB>
       \ '<TAB>' : ddc#manual_complete()
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
+call ddc#custom#patch_global('ui', 'native')
+
 call ddc#custom#patch_global('sources', [
       \ 'around',
       \ 'deoppet',
