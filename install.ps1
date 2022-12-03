@@ -46,6 +46,7 @@ try
   git init
   git remote add origin $REPO_URL
   git fetch origin $BRANCH_NAME
+  git checkout -f main
 } finally
 {
   Pop-Location
