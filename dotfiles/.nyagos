@@ -91,13 +91,6 @@ share.git_status = function ()
   return "$_"..untrack..modify..commit..branch..ab
 end
 
-share.fnm_cd = function(this)
-  local msg, _ = nyagos.raweval(nyagos.env.FNM_DIR.."/cd.cmd", ".")
-  if msg ~= nil and msg ~= "" then
-    nyagos.write(msg)
-  end
-end
-
 -- Simple Prompt for CMD.EXE
 nyagos.env.PROMPT="[$s$P$s]$_$$$s"
 
@@ -105,8 +98,6 @@ share.karano.localenv.regist_default_envs()
 
 -- Coloring Prompt for NYAGOS.exe
 nyagos.prompt = function(this)
-  share.fnm_cd()
-
   local title = "NYAGOS - ".. nyagos.getwd():gsub('\\','/')
 
   local err_level = tonumber(nyagos.eval("echo %ERRORLEVEL%")) or 0
