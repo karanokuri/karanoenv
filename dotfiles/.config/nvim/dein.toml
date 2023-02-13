@@ -39,6 +39,17 @@ hook_add = 'nnoremap <silent><Leader>t :<C-u>Deol -command=nyagos -split=floatin
 repo = 'norcalli/nvim-colorizer.lua'
 hook_add = 'source $NVIM_CONFIG_DIR/plugins/nvim-colorizer.lua/hook_add.vim'
 
+[[plugins]]
+repo = 'MunifTanjim/nui.nvim'
+
+[[plugins]]
+repo = 'rcarriga/nvim-notify'
+
+[[plugins]]
+repo = 'folke/noice.nvim'
+depends = ['nui.nvim', 'nvim-notify']
+hook_add = 'source $NVIM_CONFIG_DIR/plugins/noice.nvim/hook_add.vim'
+
 ###############################################################################
 # snippets
 
