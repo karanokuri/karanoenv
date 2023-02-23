@@ -20,5 +20,12 @@ let g:lsp_settings = {
       \   'blocklist': empty(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'node_modules/'))
       \     ? ['typescript', 'typescriptreact']
       \     : []
-      \   }
+      \   },
+      \ 'rust-analyzer': {
+      \   'initialization_options': {
+      \     'check': {
+      \       'command': 'clippy'
+      \       }
+      \     }
+      \   },
       \ }
