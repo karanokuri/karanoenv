@@ -1,4 +1,3 @@
 @echo off
 
-volta install node
-volta install yarn
+pnpm env use --global lts
