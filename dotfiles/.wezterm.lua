@@ -60,6 +60,8 @@ local config = {
 
   default_prog = { 'cmd.exe', '/c', 'call %USERPROFILE%\\.karanoenv\\setenv.bat && nyagos' },
 
+  front_end = 'WebGpu',
+
   font = wezterm.font 'HackGen Console NF',
   font_dirs = { wezterm.home_dir .. '/.karanoenv/apps/fonts' },
   font_size = 12.0,
