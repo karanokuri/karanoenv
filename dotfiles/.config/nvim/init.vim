@@ -3,6 +3,8 @@ let $NVIM_CONFIG_DIR = expand('<sfile>:p:h')
 let mapleader = "\<Space>"
 set clipboard+=unnamed
 set foldmethod=marker
+set list
+set listchars=tab:»-,extends:»,precedes:«,nbsp:%
 set mouse=a
 set noundofile
 set number
