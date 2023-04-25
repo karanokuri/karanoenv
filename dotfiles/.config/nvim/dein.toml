@@ -50,6 +50,9 @@ repo = 'folke/noice.nvim'
 depends = ['nui.nvim', 'nvim-notify']
 hook_add = 'source $NVIM_CONFIG_DIR/plugins/noice.nvim/hook_add.vim'
 
+[[plugins]]
+repo = 'aduros/ai.vim'
+
 ###############################################################################
 # snippets
 
