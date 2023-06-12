@@ -24,6 +24,6 @@ if exist %RUSTUP% (
 )
 
 echo install rls
-%RUSTUP% component add rls rust-analysis rust-src
+%RUSTUP% component add rust-analyzer rust-src
 
 endlocal
