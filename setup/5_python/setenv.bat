@@ -6,4 +6,6 @@ set PYENV=%KARANOENV_APPS_DIR%\pyenv
 set PYENV_HOME=%PYENV%
 set PYENV_ROOT=%PYENV%
 
-set PATH=%PYENV%\pyenv-win\bin;%PYENV%\pyenv-win\shims;%PATH%
+set RYE_HOME=%KARANOENV_APPS_DIR%\rye
+
+set PATH=%RYE_HOME%\shims;%PYENV%\pyenv-win\bin;%PYENV%\pyenv-win\shims;%PATH%
