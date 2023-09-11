@@ -162,10 +162,6 @@ repo = 'LumaKernel/ddc-file'
 on_source = 'ddc.vim'
 
 [[plugins]]
-repo = 'hrsh7th/vim-vsnip-integ'
-on_source = 'ddc.vim'
-
-[[plugins]]
 repo = 'hrsh7th/vim-vsnip'
 on_source = 'ddc.vim'
 
@@ -180,4 +176,8 @@ hook_source = 'source $NVIM_CONFIG_DIR/plugins/deoppet.nvim/hook_source.vim'
 
 [[plugins]]
 repo = 'Shougo/ddc-cmdline'
+on_source = 'ddc.vim'
+
+[[plugins]]
+repo = 'uga-rosa/ddc-source-vsnip'
 on_source = 'ddc.vim'
