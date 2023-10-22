@@ -22,9 +22,9 @@ $Latest = Invoke-RestMethod -Uri $API_URL -Method GET
 
 if ("$Version" -ne $Latest.tag_name)
 {
-  $Url = $Latest.assets                                `
-  | Where-Object{ $_.name -like "nyagos-*-$ARCH.zip" } `
-  | ForEach-Object browser_download_url                #
+  $Url = $Latest.assets                                  `
+  | Where-Object name -like "nyagos-*-windows-$ARCH.zip" `
+  | ForEach-Object browser_download_url                  #
 
   Write-Host "Installing $Url ..."
   if(Test-Path $DIST)
