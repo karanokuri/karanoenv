@@ -51,7 +51,8 @@ depends = ['nui.nvim', 'nvim-notify']
 hook_add = 'source $NVIM_CONFIG_DIR/plugins/noice.nvim/hook_add.vim'
 
 [[plugins]]
-repo = 'aduros/ai.vim'
+repo = 'github/copilot.vim'
+hook_add = 'source $NVIM_CONFIG_DIR/plugins/copilot.vim/hook_add.vim'
 
 ###############################################################################
 # snippets
