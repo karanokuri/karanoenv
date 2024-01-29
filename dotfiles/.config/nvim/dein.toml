@@ -54,6 +54,11 @@ hook_add = 'source $NVIM_CONFIG_DIR/plugins/noice.nvim/hook_add.vim'
 repo = 'github/copilot.vim'
 hook_add = 'source $NVIM_CONFIG_DIR/plugins/copilot.vim/hook_add.vim'
 
+[[plugins]]
+repo = 'iamcco/markdown-preview.nvim'
+on_ft = ['markdown', 'pandoc.markdown', 'rmd']
+hook_post_update = ':call mkdp#util#install()'
+
 ###############################################################################
 # snippets
 
