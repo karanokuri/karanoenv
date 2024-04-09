@@ -4,3 +4,4 @@ eservice-online.vs-sharper
 jmrog.vscode-nuget-package-manager
 ms-ceintl.vscode-language-pack-ja
 ms-dotnettools.csharp
+ms-vscode-remote.remote-containers
