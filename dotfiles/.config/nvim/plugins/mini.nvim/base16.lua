@@ -23,8 +23,6 @@ local palettes = {
     base0C = "#B5E8E0", base0D = "#96CDFB",
     base0E = "#DDB6F2", base0F = "#F2CDCD",
   },
-  -- user original
-  kawarimidoll = require('mini.base16').mini_palette('#1f1d24', '#8fecd9', 75),
 }
 
 local scheme_names = vim.tbl_keys(palettes)
