@@ -4,10 +4,6 @@ let g:lsp_log_file = ""
 let g:lsp_log_verbose = 0
 
 function! s:document_format() abort
-  if &ft =~ 'typescript\|typescriptreact' && !empty(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'node_modules/'))
-    LspDocumentFormatSync --server=efm-langserver
-    return
-  endif
   LspDocumentFormatSync
 endfunction
 
