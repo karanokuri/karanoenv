@@ -1,35 +1,58 @@
 $ErrorActionPreference = 'Stop'
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
-$ARCH = if($Env:KARANOENV_ARCH -eq 64) { 'amd64' } else { '386' }
+$ARCH = if($Env:KARANOENV_ARCH -eq 64)
+{
+  'amd64'
+} else
+{
+  '386'
+}
 
-$ARCHIVE = "go-windows-$ARCH.zip"
+$BASE_URL = 'https://go.dev/dl'
 
-$DIST = Split-Path -Parent $Env:GOROOT
+#$DIST = Split-Path -Parent $Env:GOROOT
+$DIST = $Env:GOROOT
 
 ###############################################################################
-if(Test-Path $Env:GOROOT)
+$Version = cmd /c 'go version 2>nul'                              `
+| ForEach-Object{ $_ -replace '^go version go([0-9.]+) .*', '$1'} #
+
+# [System.Version] $Version
+$Json = Invoke-RestMethod -Uri "$BASE_URL/?mode=json" -Method GET
+
+$Latest = $Json                                   `
+| Where-Object { $_.stable }                      `
+| ForEach-Object { $_.version.replace('go', '') } `
+| ForEach-Object { [System.Version] $_ }          `
+| Sort-Object -Descending -Unique                 `
+| Select-Object -First 1                          #
+
+if ($Version -eq $Latest)
 {
-  Write-Host 'Go is already exists.'
+  Write-Host "Latest Go $Version is already installed."
   exit 0
 }
 
-$PageUrl = New-Object Uri('https://golang.org/dl/')
-$parsedHtml = Invoke-WebRequest -Uri $PageUrl | % ParsedHtml
+$Url = $Json                                  `
+| Where-Object { $_.version -eq "go$Latest" } `
+| ForEach-Object { $_.files }                 `
+| Where-Object { $_.os -eq 'windows' }        `
+| Where-Object { $_.arch -eq $ARCH }          `
+| Where-Object { $_.kind -eq 'archive' }      `
+| ForEach-Object { $_.filename }              `
+| ForEach-Object { "$BASE_URL/$_" }           #
 
-$Url = $parsedHtml.getElementsByTagName('a')     |
-         % href                                  |
-         ?{ $_ -like "*/go*.windows-$ARCH.zip" } |
-         select -First 1                         |
-         %{ New-Object Uri($_) }                 |
-         % LocalPath                             |
-         %{ New-Object Uri($PageUrl, $_) }       |
-         % AbsoluteUri
+$TempFile = New-TemporaryFile
 
 Write-Host "Downloading $Url ..."
-(new-object net.webclient).DownloadFile($Url, $ARCHIVE)
+(New-Object Net.WebClient).DownloadFile($Url, $TempFile)
 
-Write-Host "Extracting $ARCHIVE ..."
-& 7z x -y $ARCHIVE "-o$DIST"
+Write-Host "Extracting $TempFile ..."
+if(Test-Path $DIST)
+{
+  Remove-Item $DIST -Recurse -Force
+}
+7z x -y $TempFile "-o$(Split-Path -Parent $DIST)"
 
-del $ARCHIVE
+Remove-Item $TempFile
