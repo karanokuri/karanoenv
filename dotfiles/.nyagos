@@ -16,10 +16,10 @@ set{
   PATHEXT       = ".COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC",
 }
 
-addpath "%HOME%\\.bin"
+if nyagos.access("%HOME%\\.bin", 0) then nyagos.envadd("PATH", "%HOME%\\.bin") end
 for i,v in pairs(nyagos.glob(nyagos.env.HOME.."\\.tools\\*")) do
   path = nyagos.pathjoin(v, "bin")
-  if nyagos.access(path, 0) then addpath(path) end
+  if nyagos.access(path, 0) then nyagos.envadd("PATH", path) end
 end
 
 -- aliases --------------------------------------------------------------------
